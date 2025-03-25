@@ -58,7 +58,7 @@ RUN curl -fsSL ${MC_HELPER_BASE_URL}/mc-image-helper-${MC_HELPER_VERSION}.tgz \
   | tar -C /usr/share -zxf - \
   && ln -s /usr/share/mc-image-helper-${MC_HELPER_VERSION}/bin/mc-image-helper /usr/bin
 
-VOLUME ["/data"]
+#VOLUME ["/data"]
 WORKDIR /data
 
 STOPSIGNAL SIGTERM
@@ -71,6 +71,7 @@ COPY --chmod=755 bin/ /usr/local/bin/
 COPY --chmod=755 bin/mc-health /health.sh
 COPY --chmod=644 files/* /image/
 COPY --chmod=755 files/auto /auto
+COPY plugins /data/plugins
 
 RUN curl -fsSL -o /image/Log4jPatcher.jar https://github.com/CreeperHost/Log4jPatcher/releases/download/v1.0.1/Log4jPatcher-1.0.1.jar
 
