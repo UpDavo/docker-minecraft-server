@@ -71,9 +71,10 @@ COPY --chmod=755 bin/ /usr/local/bin/
 COPY --chmod=755 bin/mc-health /health.sh
 COPY --chmod=644 files/* /image/
 COPY --chmod=755 files/auto /auto
-COPY plugins /data/plugins
-RUN chmod -R 755 /data/plugins
-RUN chown -R 1000:1000 /data
+COPY plugins /plugins  # Copiamos los plugins al contenedor
+
+# En el arranque, copiamos plugins a /data si el volumen no los tiene
+CMD ["/bin/sh", "-c", "cp -n /plugins/* /data/plugins/ 2>/dev/null || true && /start"]
 
 
 RUN curl -fsSL -o /image/Log4jPatcher.jar https://github.com/CreeperHost/Log4jPatcher/releases/download/v1.0.1/Log4jPatcher-1.0.1.jar
