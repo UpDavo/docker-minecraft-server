@@ -73,9 +73,12 @@ COPY --chmod=644 files/* /image/
 COPY --chmod=755 files/auto /auto
 COPY plugins /plugins
 
-# En el arranque, copiamos plugins a /data si el volumen no los tiene
-CMD ["/bin/sh", "-c", "cp -n /plugins/* /data/plugins/ 2>/dev/null || true && /start"]
+# ... [todo lo anterior igual, hasta aquí]
+COPY --chmod=644 files/server.properties /image/server.properties
+COPY --chmod=755 scripts/force-copy-configs.sh /force-copy-configs.sh
 
+# CMD final: sobreescribe server.properties + copia plugins si faltan + lanza el server
+CMD ["/bin/sh", "-c", "/force-copy-configs.sh && cp -n /plugins/* /data/plugins/ 2>/dev/null || true && /start"]
 
 RUN curl -fsSL -o /image/Log4jPatcher.jar https://github.com/CreeperHost/Log4jPatcher/releases/download/v1.0.1/Log4jPatcher-1.0.1.jar
 
