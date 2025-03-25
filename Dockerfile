@@ -71,7 +71,7 @@ COPY --chmod=755 bin/ /usr/local/bin/
 COPY --chmod=755 bin/mc-health /health.sh
 COPY --chmod=644 files/* /image/
 COPY --chmod=755 files/auto /auto
-COPY plugins /plugins  # Copiamos los plugins al contenedor
+COPY plugins /plugins
 
 # En el arranque, copiamos plugins a /data si el volumen no los tiene
 CMD ["/bin/sh", "-c", "cp -n /plugins/* /data/plugins/ 2>/dev/null || true && /start"]
