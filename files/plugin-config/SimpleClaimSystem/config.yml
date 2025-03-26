@@ -1,0 +1,57 @@
+# SimpleClaimSystem - Configuración personalizada
+
+plugin-prefix: "&6[&eClaims&6] "
+
+# Mensaje de bienvenida cuando un jugador entra a un claim
+welcome-message-enabled: true
+welcome-message: "&eBienvenido al claim de &6%owner%"
+
+# Permite usar /claim sin argumentos
+auto-claim-enabled: true
+
+# Modo de reclamación: CHUNK o WORLDGUARD (dejamos CHUNK)
+claim-mode: CHUNK
+
+# Tamaño del claim en chunks (1 chunk = 16x16)
+default-claim-size: 1
+
+# Máximo de claims por jugador (pueden tener múltiples áreas)
+max-claims-per-player: 5
+
+# Máximo total de chunks que puede reclamar un jugador
+max-claim-chunks-per-player: 10
+
+# ¿Permitir que los jugadores gestionen permisos de su claim?
+allow-permission-management: true
+
+# ¿Permitir /unclaim?
+allow-unclaim: true
+
+# Mostrar bordes visualmente al usar /claim (recomendado true)
+show-visualizer: true
+
+# Tiempo en segundos que se muestra el visualizador
+visualizer-duration: 10
+
+# Permitir expandir claims con comandos como /claim expand
+allow-claim-expansion: true
+
+# ¿Permitir comandos como /claim add <jugador>?
+allow-trust-commands: true
+
+# Comando personalizado para ver tus claims
+custom-commands:
+  - "claims"
+  - "misclaims"
+
+# Mensajes traducidos (opcional, si quieres que todo esté en español)
+messages:
+  claim-success: "&aHas reclamado esta área."
+  unclaim-success: "&cHas liberado esta área."
+  already-claimed: "&cEste chunk ya ha sido reclamado."
+  not-your-claim: "&cEste no es tu claim."
+  added-player: "&aHas agregado a &e%player% &aal claim."
+  removed-player: "&cHas eliminado a &e%player% &cdel claim."
+  no-permission: "&cNo tienes permiso para hacer eso."
+  no-claim-found: "&cNo estás dentro de un claim."
+

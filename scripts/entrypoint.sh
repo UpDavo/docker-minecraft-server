@@ -13,5 +13,12 @@ mkdir -p /data/plugins
 echo "[wrapper] Copiando plugins desde la imagen..."
 cp -r /plugins/* /data/plugins/
 
+echo "[wrapper] Copiando datapacks al mundo..."
+mkdir -p /data/world/datapacks
+cp -r /image/datapacks/* /data/world/datapacks/
+
+mkdir -p /data/plugins/SimpleClaimSystem
+cp -r /image/plugin-configs/SimpleClaimSystem/* /data/plugins/SimpleClaimSystem/
+
 echo "[wrapper] Ejecutando script original /start..."
 exec /start "$@"
