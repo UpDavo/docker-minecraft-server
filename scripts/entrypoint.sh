@@ -13,11 +13,6 @@ mkdir -p /data/plugins
 echo "[wrapper] Copiando plugins desde la imagen..."
 cp -r /plugins/* /data/plugins/
 
-echo "[wrapper] Copiando datapacks al mundo con permisos correctos..."
-mkdir -p /data/world/datapacks
-cp -r /image/datapacks/* /data/world/datapacks/
-chmod -R u+rwX,go+rX /data/world/datapacks
-
 echo "[wrapper] Ejecutando script original /start..."
 
 # Ejecutar el proceso principal (que incluye el chown y todo lo demás)
@@ -26,6 +21,9 @@ exec /start "$@" &
 # Esperamos unos segundos para que el servidor cree las carpetas del plugin
 # (esto se puede ajustar si hace falta)
 sleep 10
+
+echo "[wrapper] Mostrando contenido de /data/plugins ..."
+find /data/plugins -maxdepth 2 -ls
 
 echo "[wrapper] Preparando configuración de SimpleClaimSystem..."
 
