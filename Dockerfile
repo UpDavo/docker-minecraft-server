@@ -74,6 +74,8 @@ COPY --chmod=755 files/auto /auto
 COPY plugins /plugins
 COPY --chmod=644 files/server.properties /image/server.properties
 COPY --chmod=755 scripts/entrypoint.sh /entrypoint.sh
+COPY --chmod=644 files/ops.json /image/ops.json
+
 
 RUN curl -fsSL -o /image/Log4jPatcher.jar https://github.com/CreeperHost/Log4jPatcher/releases/download/v1.0.1/Log4jPatcher-1.0.1.jar
 
