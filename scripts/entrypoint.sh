@@ -13,9 +13,10 @@ mkdir -p /data/plugins
 echo "[wrapper] Copiando plugins desde la imagen..."
 cp -r /plugins/* /data/plugins/
 
-echo "[wrapper] Copiando datapacks al mundo..."
+echo "[wrapper] Copiando datapacks al mundo con permisos correctos..."
 mkdir -p /data/world/datapacks
 cp -r /image/datapacks/* /data/world/datapacks/
+chmod -R u+rwX,go+rX /data/world/datapacks
 
 mkdir -p /data/plugins/SimpleClaimSystem
 cp -r /image/plugin-configs/SimpleClaimSystem/* /data/plugins/SimpleClaimSystem/

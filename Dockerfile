@@ -75,7 +75,7 @@ COPY plugins /plugins
 COPY --chmod=644 files/server.properties /image/server.properties
 COPY --chmod=755 scripts/entrypoint.sh /entrypoint.sh
 COPY --chmod=644 files/ops.json /image/ops.json
-COPY --chmod=644 files/datapacks/ /image/datapacks/
+COPY --chmod=755 files/datapacks/ /image/datapacks/
 COPY --chmod=644 files/plugin-config/ /image/plugin-configs/
 
 

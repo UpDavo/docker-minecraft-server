@@ -1,6 +1,3 @@
 {
-    "values": [
-      "healthfix:force_health"
-    ]
-  }
-  
+  "values": ["healthfix:force_health"]
+}
