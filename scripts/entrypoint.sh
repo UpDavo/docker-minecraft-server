@@ -18,8 +18,28 @@ mkdir -p /data/world/datapacks
 cp -r /image/datapacks/* /data/world/datapacks/
 chmod -R u+rwX,go+rX /data/world/datapacks
 
-mkdir -p /data/plugins/SimpleClaimSystem
-cp -r /image/plugin-configs/SimpleClaimSystem/* /data/plugins/SimpleClaimSystem/
-
 echo "[wrapper] Ejecutando script original /start..."
-exec /start "$@"
+
+# Ejecutar el proceso principal (que incluye el chown y todo lo demás)
+exec /start "$@" &
+
+# Esperamos unos segundos para que el servidor cree las carpetas del plugin
+# (esto se puede ajustar si hace falta)
+sleep 10
+
+echo "[wrapper] Preparando configuración de SimpleClaimSystem..."
+
+CONFIG_TARGET="/data/plugins/SimpleClaimSystem/config.yml"
+CONFIG_SOURCE="/image/plugin-configs/SimpleClaimSystem/config.yml"
+
+# Solo reemplazamos config si existe el archivo en la imagen y el plugin ya creó la carpeta
+if [ -d "/data/plugins/SimpleClaimSystem" ] && [ -f "$CONFIG_SOURCE" ]; then
+  echo "[wrapper] Reemplazando config.yml de SimpleClaimSystem"
+  cp "$CONFIG_SOURCE" "$CONFIG_TARGET"
+  chmod 644 "$CONFIG_TARGET"
+  chown ${UID:-1000}:${GID:-1000} "$CONFIG_TARGET"
+else
+  echo "[wrapper] Saltando reemplazo de config.yml - carpeta o fuente no encontrada"
+fi
+
+wait
